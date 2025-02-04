@@ -1,11 +1,3 @@
-/*
- * @Author: AaronZ345 aaron9834@icloud.com
- * @Date: 2024-10-02 23:09:24
- * @LastEditors: AaronZ345 aaron9834@icloud.com
- * @LastEditTime: 2025-02-04 20:44:02
- * @FilePath: /GTSingerDemo/assets/index-BLYJ2ejE.js
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- */
 var Zx=(e,t)=>()=>(t||e((t={exports:{}}).exports,t),t.exports);var qae=Zx((Gn,Yn)=>{(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const l of document.querySelectorAll('link[rel="modulepreload"]'))o(l);new MutationObserver(l=>{for(const s of l)if(s.type==="childList")for(const i of s.addedNodes)i.tagName==="LINK"&&i.rel==="modulepreload"&&o(i)}).observe(document,{childList:!0,subtree:!0});function n(l){const s={};return l.integrity&&(s.integrity=l.integrity),l.referrerPolicy&&(s.referrerPolicy=l.referrerPolicy),l.crossOrigin==="use-credentials"?s.credentials="include":l.crossOrigin==="anonymous"?s.credentials="omit":s.credentials="same-origin",s}function o(l){if(l.ep)return;l.ep=!0;const s=n(l);fetch(l.href,s)}})();/**
 * @vue/shared v3.4.27
 * (c) 2018-present Yuxi (Evan) You and Vue contributors
