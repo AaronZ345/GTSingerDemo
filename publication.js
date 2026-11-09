@@ -3,31 +3,38 @@ const app = document.querySelector('#app');
 const template = document.querySelector('#publication-template');
 const titleText = document.querySelector('meta[name="citation_title"]')?.content;
 
+function removeLegacyResources() {
+  // The generated app mounts the same two-icon group on multiple routes.
+  for (const code of app.querySelectorAll('.el-main span > a[href="https://github.com/AaronZ345/GTSinger"]')) {
+    const codeItem = code.parentElement;
+    const group = codeItem.parentElement;
+    const dataItem = group.lastElementChild;
+    if (group.tagName !== 'DIV' || group.children.length !== 2 ||
+        group.firstElementChild !== codeItem || dataItem.tagName !== 'SPAN') continue;
+
+    const data = dataItem.querySelector(':scope > a[href="https://huggingface.co/datasets/AaronZ345/GTSinger"]');
+    if (code.textContent.trim() === 'Code' && data?.textContent.trim() === 'Data' &&
+        codeItem.querySelector(':scope > svg') && dataItem.querySelector(':scope > svg')) {
+      group.remove();
+    }
+  }
+}
+
 function updatePublication() {
+  removeLegacyResources();
   const hero = app.querySelector('#home .headgraph > div');
-  if (!hero) return;
+  if (!hero || hero.querySelector(':scope > .publication-meta')) return;
 
   const [title, lead] = hero.children;
   if (!title || !lead) return;
 
-  if (!hero.querySelector(':scope > .publication-meta')) {
-    title.textContent = titleText;
-    title.setAttribute('role', 'heading');
-    title.setAttribute('aria-level', '1');
-    title.classList.add('publication-title');
-    lead.hidden = true;
-    // Keep the added block outside Vue's cached title and intro fragment.
-    lead.after(template.content.cloneNode(true));
-  }
-
-  // Remove the legacy action group when Vue mounts Home.
-  for (const node of [...hero.children]) {
-    if (!node.matches('.publication-meta') &&
-        node.querySelector('a[href="https://github.com/AaronZ345/GTSinger"]') &&
-        node.querySelector('a[href="https://huggingface.co/datasets/AaronZ345/GTSinger"]')) {
-      node.remove();
-    }
-  }
+  title.textContent = titleText;
+  title.setAttribute('role', 'heading');
+  title.setAttribute('aria-level', '1');
+  title.classList.add('publication-title');
+  lead.hidden = true;
+  // Keep the added block outside Vue's cached title and intro fragment.
+  lead.after(template.content.cloneNode(true));
 }
 
 if (app && template && titleText) {
