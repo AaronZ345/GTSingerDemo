@@ -31,24 +31,77 @@
 .publication-links svg { width: 22px; height: 22px; flex: none; }
 .publication-links a:hover span { text-decoration: underline; }
 
-#home .headgraph .publication-title {
+/* Reserve the same title, content and resource positions on every route. */
+#app .el-main .headgraph {
+  --hero-height: 25rem;
+  --hero-title-height: 6rem;
+  --hero-top: 2.5rem;
+  --hero-bottom: 2rem;
   box-sizing: border-box;
-  padding: clamp(1.8rem, 4vw, 3.5rem) 1rem 0 !important;
-  margin: 0 auto;
+  position: relative;
+  height: var(--hero-height);
+  padding: 0 !important;
+}
+#app .el-main .headgraph > div {
+  box-sizing: border-box;
+  position: static;
+  display: grid;
+  grid-template-rows: var(--hero-title-height) minmax(0, 1fr);
+  gap: 1.25rem;
+  justify-items: center;
+  align-items: start;
+  height: 100%;
+  padding: var(--hero-top) 1.5rem 5.25rem;
+}
+#app .el-main .headgraph .publication-title {
+  box-sizing: border-box;
+  grid-row: 1;
+  width: 100%;
   max-width: 68rem;
-  font-size: clamp(1.65rem, 4.2vw, 2.5rem) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  font-size: clamp(1.4rem, 3.8vw, 2.5rem) !important;
   line-height: 1.2;
   text-wrap: balance;
 }
-#app .el-main .headgraph .publication-meta { max-width: 64rem; margin-inline: auto; padding-inline: 1rem; text-align: center; }
-#app .el-main .headgraph .publication-links { justify-content: center; }
-#app .el-main .headgraph .publication-meta--resources { margin: .9rem auto 0; }
-#app .el-main .headgraph { padding-bottom: clamp(1.25rem, 3vw, 2rem); }
-#app .el-main .headgraph:not(#home .headgraph) > div > :nth-child(2) {
-  margin-bottom: 0 !important;
+#app .el-main .headgraph .publication-summary {
+  grid-row: 2;
+  width: min(50rem, 100%) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: clamp(1.05rem, 2vw, 1.25rem) !important;
+  line-height: 1.6;
 }
+#app .el-main .headgraph .publication-meta {
+  grid-row: 2;
+  width: 100%;
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
+#app .el-main .headgraph .publication-meta--resources { display: contents; }
+#app .el-main .headgraph .publication-links {
+  position: absolute;
+  inset-inline: 1rem;
+  bottom: var(--hero-bottom);
+  justify-content: center;
+  font-size: 1rem;
+  line-height: 1.55;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+#app .el-main .headgraph .publication-links a span { font: inherit; }
 
 @media (max-width: 640px) {
+  #app .el-main .headgraph {
+    --hero-height: 31.25rem;
+    --hero-title-height: 9rem;
+    --hero-top: 1.75rem;
+    --hero-bottom: 1.5rem;
+  }
+  #app .el-main .headgraph .publication-meta { font-size: .9rem; }
+  #app .el-main .headgraph .publication-links { column-gap: .5rem; }
+  #app .el-main .headgraph .publication-links a { font-size: 14px; line-height: 22px; gap: .35rem; }
   #app .el-header { height: auto !important; }
   #app .el-menu-demo {
     height: auto !important;
