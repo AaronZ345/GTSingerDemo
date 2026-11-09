@@ -16,18 +16,20 @@
 .publication-links {
   display: flex;
   flex-wrap: wrap;
-  gap: .45rem;
+  column-gap: 1.2rem;
+  row-gap: .4rem;
 }
 .publication-links a {
-  background: var(--publication-surface);
-  border: 1px solid var(--publication-border);
-  border-radius: .45rem;
-  padding: .35rem .75rem;
-  font-size: .9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .12rem 0;
+  font-size: .95rem;
   font-weight: 600;
   text-decoration: none;
 }
-.publication-links a:hover { text-decoration: underline; }
+.publication-links svg { width: 22px; height: 22px; flex: none; }
+.publication-links a:hover span { text-decoration: underline; }
 
 #home .headgraph .publication-title {
   box-sizing: border-box;
@@ -40,9 +42,23 @@
 }
 #home .publication-meta { max-width: 64rem; margin-inline: auto; padding-inline: 1rem; text-align: center; }
 #home .publication-links { justify-content: center; }
-#home .publication-lead {
-  box-sizing: border-box;
-  width: min(calc(100% - 2rem), 46rem) !important;
-  margin: 1.25rem auto 1.8rem !important;
-  font-size: clamp(1rem, 2vw, 1.25rem) !important;
+#home .headgraph { padding-bottom: clamp(1.25rem, 3vw, 2rem); }
+
+@media (max-width: 640px) {
+  #app .el-header { height: auto !important; }
+  #app .el-menu-demo {
+    height: auto !important;
+    flex-wrap: wrap;
+    min-height: 58px;
+  }
+  #app .el-menu-demo > :first-child {
+    font-size: 1.2rem !important;
+    margin-inline: .7rem !important;
+  }
+  #app .el-menu-demo > .el-menu-item,
+  #app .el-menu-demo > .el-sub-menu > .el-sub-menu__title {
+    height: 58px;
+    line-height: 58px;
+    padding-inline: .55rem;
+  }
 }

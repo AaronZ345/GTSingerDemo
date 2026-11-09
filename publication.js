@@ -18,7 +18,7 @@ function updatePublication() {
   title.setAttribute('role', 'heading');
   title.setAttribute('aria-level', '1');
   title.classList.add('publication-title');
-  lead.classList.add('publication-lead');
+  lead.hidden = true;
   title.after(template.content.cloneNode(true));
   if (legacyLinks) legacyLinks.hidden = true;
 }
