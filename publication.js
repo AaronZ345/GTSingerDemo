@@ -5,22 +5,29 @@ const titleText = document.querySelector('meta[name="citation_title"]')?.content
 
 function updatePublication() {
   const hero = app.querySelector('#home .headgraph > div');
-  if (!hero || hero.querySelector('.publication-meta')) return;
+  if (!hero) return;
 
-  const [title, lead, ...rest] = hero.children;
+  const [title, lead] = hero.children;
   if (!title || !lead) return;
-  const legacyLinks = rest.find((node) =>
-    node.querySelector('a[href="https://github.com/AaronZ345/GTSinger"]') &&
-    node.querySelector('a[href="https://huggingface.co/datasets/AaronZ345/GTSinger"]')
-  );
 
-  title.textContent = titleText;
-  title.setAttribute('role', 'heading');
-  title.setAttribute('aria-level', '1');
-  title.classList.add('publication-title');
-  lead.hidden = true;
-  title.after(template.content.cloneNode(true));
-  if (legacyLinks) legacyLinks.hidden = true;
+  if (!hero.querySelector(':scope > .publication-meta')) {
+    title.textContent = titleText;
+    title.setAttribute('role', 'heading');
+    title.setAttribute('aria-level', '1');
+    title.classList.add('publication-title');
+    lead.hidden = true;
+    // Keep the added block outside Vue's cached title and intro fragment.
+    lead.after(template.content.cloneNode(true));
+  }
+
+  // The original links are mounted again whenever Home is reopened.
+  for (const node of hero.children) {
+    if (!node.matches('.publication-meta') &&
+        node.querySelector('a[href="https://github.com/AaronZ345/GTSinger"]') &&
+        node.querySelector('a[href="https://huggingface.co/datasets/AaronZ345/GTSinger"]')) {
+      node.hidden = true;
+    }
+  }
 }
 
 if (app && template && titleText) {
