@@ -24,10 +24,15 @@ function removeLegacyResources() {
 function updatePublication() {
   removeLegacyResources();
   const hero = app.querySelector('.el-main .headgraph > div');
-  if (!hero || hero.querySelector(':scope > .publication-meta')) return;
+  if (!hero) return;
 
   const [title, lead] = hero.children;
   if (!title || !lead) return;
+  title.classList.add('publication-title');
+  title.setAttribute('role', 'heading');
+  title.setAttribute('aria-level', '1');
+  lead.classList.add('publication-summary');
+  if (hero.querySelector(':scope > .publication-meta')) return;
 
   if (!hero.closest('#home')) {
     const resources = document.createElement('div');
@@ -38,9 +43,6 @@ function updatePublication() {
   }
 
   title.textContent = titleText;
-  title.setAttribute('role', 'heading');
-  title.setAttribute('aria-level', '1');
-  title.classList.add('publication-title');
   lead.hidden = true;
   // Keep the added block outside Vue's cached title and intro fragment.
   lead.after(template.content.cloneNode(true));
