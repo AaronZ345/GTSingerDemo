@@ -42,7 +42,10 @@
 }
 #home .publication-meta { max-width: 64rem; margin-inline: auto; padding-inline: 1rem; text-align: center; }
 #home .publication-links { justify-content: center; }
-#home .headgraph { padding-bottom: clamp(1.25rem, 3vw, 2rem); }
+#app .el-main .headgraph { padding-bottom: clamp(1.25rem, 3vw, 2rem); }
+#app .el-main .headgraph:not(#home .headgraph) > div > :last-child {
+  margin-bottom: 0 !important;
+}
 
 @media (max-width: 640px) {
   #app .el-header { height: auto !important; }
