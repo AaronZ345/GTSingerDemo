@@ -9,7 +9,7 @@
   margin: 1rem 0 1.35rem;
 }
 .publication-meta .publication-venue { margin: 0 0 .35rem; font-weight: 700; }
-.publication-meta .publication-authors { margin: 0 0 .85rem; }
+.publication-meta .publication-authors { margin: 0; }
 .publication-author { display: inline-block; white-space: nowrap; }
 .publication-meta a { color: var(--publication-accent); }
 .publication-meta a:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
@@ -74,6 +74,7 @@
 }
 #app .el-main .headgraph .publication-meta {
   grid-row: 2;
+  align-self: center;
   width: 100%;
   max-width: 64rem;
   margin: 0 auto;
