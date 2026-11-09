@@ -2,6 +2,7 @@
 const app = document.querySelector('#app');
 const template = document.querySelector('#publication-template');
 const titleText = document.querySelector('meta[name="citation_title"]')?.content;
+const resourceLinks = template?.content.querySelector('.publication-links');
 
 function removeLegacyResources() {
   // The generated app mounts the same two-icon group on multiple routes.
@@ -22,11 +23,19 @@ function removeLegacyResources() {
 
 function updatePublication() {
   removeLegacyResources();
-  const hero = app.querySelector('#home .headgraph > div');
+  const hero = app.querySelector('.el-main .headgraph > div');
   if (!hero || hero.querySelector(':scope > .publication-meta')) return;
 
   const [title, lead] = hero.children;
   if (!title || !lead) return;
+
+  if (!hero.closest('#home')) {
+    const resources = document.createElement('div');
+    resources.className = 'publication-meta publication-meta--resources';
+    resources.append(resourceLinks.cloneNode(true));
+    lead.after(resources);
+    return;
+  }
 
   title.textContent = titleText;
   title.setAttribute('role', 'heading');
@@ -37,7 +46,7 @@ function updatePublication() {
   lead.after(template.content.cloneNode(true));
 }
 
-if (app && template && titleText) {
+if (app && resourceLinks && titleText) {
   updatePublication();
   new MutationObserver(updatePublication).observe(app, { childList: true, subtree: true });
 }
