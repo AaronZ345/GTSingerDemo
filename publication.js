@@ -20,12 +20,12 @@ function updatePublication() {
     lead.after(template.content.cloneNode(true));
   }
 
-  // The original links are mounted again whenever Home is reopened.
-  for (const node of hero.children) {
+  // Remove the legacy action group when Vue mounts Home.
+  for (const node of [...hero.children]) {
     if (!node.matches('.publication-meta') &&
         node.querySelector('a[href="https://github.com/AaronZ345/GTSinger"]') &&
         node.querySelector('a[href="https://huggingface.co/datasets/AaronZ345/GTSinger"]')) {
-      node.hidden = true;
+      node.remove();
     }
   }
 }
